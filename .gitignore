@@ -39,7 +39,7 @@ $RECYCLE.BIN/
 
 # Build results
 */Debug/*.*
-!*/Debug/*.dll
+!**/Debug/*.dll
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
