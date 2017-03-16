@@ -9,7 +9,7 @@ Game::Game()
 
 void Game::run()
 {
-	const std::chrono::nanoseconds FRAMETIME(16666666);		// Equal to 16.66ms or 1000/60
+	const std::chrono::nanoseconds FRAMETIME(16666667);		// Equal to 16.66ms or 1000/60
 	using clock = std::chrono::high_resolution_clock;
 	
 	auto gameTimeStart  = clock::now();						// Total runtime of the program
@@ -18,11 +18,13 @@ void Game::run()
 
 	while (m_window.isOpen())
 	{
-		auto deltaTime = clock::now() - frameTimeStart;	// Time passed for last loop
-		frameTimeStart = clock::now();						// Reset
-		accumulator += std::chrono::duration_cast<std::chrono::nanoseconds>(deltaTime);
-
-		accumulator += deltaTime;							// Add time passed last loop
+		if (clock::now() - frameTimeStart > std::chrono::milliseconds(1))
+		{
+			auto deltaTime = clock::now() - frameTimeStart;		// Time passed for last loop
+			frameTimeStart = clock::now();						// Reset
+			accumulator += deltaTime;							// Add time passed last loop
+		}
+									
 
 		sf::Event event;
 		while (m_window.pollEvent(event))					// Gets all events
@@ -30,13 +32,12 @@ void Game::run()
 			if (event.type == sf::Event::Closed)
 				m_window.close();
 		}
-
+		
 		while (accumulator >= FRAMETIME)					// Update if enough time has passed
 		{
 			accumulator -= FRAMETIME;						
 			update();
 		}
-		render();											// Render ever loop
 	}
 
 	// For checkign what the fps was

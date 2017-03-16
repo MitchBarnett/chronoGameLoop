@@ -306,3 +306,4 @@ __pycache__/
 # End of https://www.gitignore.io/api/visualstudio,windows
 !physicsGame/SFML/lib/*
 !physicsGame/Box2D/lib/*
+enc_temp_folder/ee66da11473e3dd3fc856a1c43e5a96/Game.cpp
