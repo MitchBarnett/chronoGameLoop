@@ -37,7 +37,9 @@ void Game::run()
 		{
 			accumulator -= FRAMETIME;						
 			update();
+			
 		}
+		render();										// Render ever loop
 	}
 
 	// For checkign what the fps was
